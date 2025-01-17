@@ -2,7 +2,7 @@
 
 pipeline {
     agent {
-        docker {
+        any {
             image 'astanciuona/my-piper-test-image' // Your custom Docker image
         }
     }
