@@ -1,7 +1,7 @@
 @Library('piper') _
 
 pipeline {
-    any {
+    agent {
         docker {
             image 'astanciuona/my-piper-test-image' // Your custom Docker image
         }
