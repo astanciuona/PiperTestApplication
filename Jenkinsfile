@@ -13,20 +13,19 @@ pipeline {
                 sh './mvnw clean package' // Adjust this if you use a different build tool
             }
         }
-        stage('Initialize') {
+        stage('Load Config') {
             steps {
                 script {
-                    // Load configuration from the shared library's .pipeline/config.yml
-                    def configContent = libraryResource('.pipeline/config.yml')
-                    def config = readYaml text: configContent
-                    echo "Loaded config: ${config}"
+                    // Load the config file from resources/config.yml
+                    def configContent = libraryResource('config.yml')
+                    echo "Loaded config: ${configContent}"
                 }
             }
         }
         stage('Run Piper Test Step') {
             steps {
                 script {
-                    // Call the custom step from the shared library
+                    // Call the custom step
                     piperTestStep()
                 }
             }
