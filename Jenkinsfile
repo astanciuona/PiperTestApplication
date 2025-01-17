@@ -1,24 +1,12 @@
 @Library('piper') _
 
 pipeline {
-    agent {
+    any {
         docker {
             image 'astanciuona/my-piper-test-image' // Your custom Docker image
         }
     }
-    environment {
-        PATH = "${env.PATH}:/home/piper/bin" // Ensure Piper binaries are in the PATH
-    }
     stages {
-        stage('Setup') {
-            steps {
-                echo 'Setting up the environment...'
-                script {
-                    // Initialize Piper, if required
-                    piperExecuteBin script: this
-                }
-            }
-        }
         stage('Build') {
             steps {
                 echo 'Building the piper-test Java project...'
