@@ -13,15 +13,15 @@ pipeline {
                 sh './mvnw clean package' // Adjust this if you use a different build tool
             }
         }
-        stage('Custom Step') {
-            steps {
-                echo 'Executing custom Java step...'
-                script {
-                    // Run your custom Java logic from the packaged .jar
-                    sh 'java -cp target/piper-test-0.0.1-SNAPSHOT.jar com.onapis.pipertest.PiperTestApplication'
-                }
-            }
-        }
+//         stage('Custom Step') {
+//             steps {
+//                 echo 'Executing custom Java step...'
+//                 script {
+//                     // Run your custom Java logic from the packaged .jar
+//                     sh 'java -cp target/piper-test-0.0.1-SNAPSHOT.jar com.onapis.pipertest.PiperTestApplication'
+//                 }
+//             }
+//         }
     }
     post {
         always {
