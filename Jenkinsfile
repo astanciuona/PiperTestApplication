@@ -13,15 +13,24 @@ pipeline {
                 sh './mvnw clean package' // Adjust this if you use a different build tool
             }
         }
-//         stage('Custom Step') {
-//             steps {
-//                 echo 'Executing custom Java step...'
-//                 script {
-//                     // Run your custom Java logic from the packaged .jar
-//                     sh 'java -cp target/piper-test-0.0.1-SNAPSHOT.jar com.onapis.pipertest.PiperTestApplication'
-//                 }
-//             }
-//         }
+        stage('Initialize') {
+            steps {
+                script {
+                    // Load configuration from the shared library's .pipeline/config.yml
+                    def configContent = libraryResource('.pipeline/config.yml')
+                    def config = readYaml text: configContent
+                    echo "Loaded config: ${config}"
+                }
+            }
+        }
+        stage('Run Piper Test Step') {
+            steps {
+                script {
+                    // Call the custom step from the shared library
+                    piperTestStep()
+                }
+            }
+        }
     }
     post {
         always {
